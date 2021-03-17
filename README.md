@@ -3,7 +3,7 @@
 This is the official repository for our paper [Neural Reprojection Error: Merging Feature Learning and Camera Pose Estimation ](https://arxiv.org/abs/2103.07153), to appear in CVPR 2021. Code to will be released prior to the conference.
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2103.07153"><img src="images/teaser.pdf" width="60%"/></a>
+  <a href="https://arxiv.org/abs/2103.07153"><img src="images/teaser.png" width="70%"/></a>
 </p>
 
 ## Abstract
