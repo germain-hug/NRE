@@ -1,28 +1,63 @@
-# Neural Reprojection Error: Merging Feature Learning and Camera Pose Estimation 
+# Neural Reprojection Error: Merging Feature Learning and Camera Pose Estimation (CVPR 2021)
 
-This is the official repository for our paper [Neural Reprojection Error: Merging Feature Learning and Camera Pose Estimation ](https://arxiv.org/abs/2103.07153), to appear in CVPR 2021. Code to will be released prior to the conference.
+This is the official repository for our paper, which contains model weights and source code to perform NRE-based absolute camera pose estimation.
+
+[[Paper](https://openaccess.thecvf.com/content/CVPR2021/papers/Germain_Neural_Reprojection_Error_Merging_Feature_Learning_and_Camera_Pose_Estimation_CVPR_2021_paper.pdf)]
+[[Supp.Mat.](https://openaccess.thecvf.com/content/CVPR2021/supplemental/Germain_Neural_Reprojection_Error_CVPR_2021_supplemental.pdf)]
+[[ArXiv](https://arxiv.org/abs/2103.07153)]
+[[Website](https://www.hugogermain.com/nre)]
+
+## :gear: Dependencies
+
+This repository was tested with the following packages, other versions should be compatible:
+
+* Python 3.8.5
+* PyTorch 1.8.1
+* PyTorch Lightning 1.2.10
+* OpenCV 4.5.1
+* Plotly 4.10.0
+* NumPy 1.19.2
+* coloredlogs 15.0
+
+They can all be installed following command:  
+`pip3 install numpy opencv-python torch torchvision pytorch-lightning plotly coloredlogs`
+
+## :test_tube: Running
+
+For a given pair of images, localizing with the NRE-based pose estimator is as simple as:
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2103.07153"><img src="images/teaser.png" width="90%"/></a>
+<img src="assets/carbon.png" width="100%"/>
 </p>
 
-## Abstract
+## :video_game: Try it
 
-Absolute camera pose estimation is usually addressed by sequentially solving two distinct subproblems: First a feature matching problem that seeks to establish putative 2D-3D correspondences, and then a Perspective-n-Point problem that minimizes, with respect to the camera pose, the sum of so-called Reprojection Errors (RE). We argue that generating putative 2D-3D correspondences 1) leads to an important loss of information that needs to be compensated as far as possible, within RE, through the choice of a robust loss and the tuning of its hyperparameters and 2) may lead to an RE that conveys erroneous data to the pose estimator. In this paper, we introduce the Neural Reprojection Error (NRE) as a substitute for RE. NRE allows to rethink the camera pose estimation problem by merging it with the feature learning problem, hence leveraging richer information than 2D-3D correspondences and eliminating the need for choosing a robust loss and its hyperparameters. Thus NRE can be used as training loss to learn image descriptors tailored for pose estimation. We also propose a coarse-to-fine optimization method able to very efficiently minimize a sum of NRE terms with respect to the camera pose. We experimentally demonstrate that NRE is a good substitute for RE as it significantly improves both the robustness and the accuracy of the camera pose estimate while being computationally and memory highly efficient. From a broader point of view, we believe this new way of merging deep learning and 3D geometry may be useful in other computer vision applications.
+You can run NRE-based camera pose estimation on a Megadepth validation sample in `example.ipynb`.
+You will need to have the aforementionned dependencies installed, as well as a GPU with 8Gb+ memory.
 
-## BibTex
+## :control_knobs: Additional parameters
+
+For additional control over NRE-based camera pose estimation, you can tweak several parameters in `config.yml`.
+Notably:
+- `skip_gnc`: Skip the coarse and fine GNC-IRLS refinement steps
+- `n_iter_p3p`: The number of P3P iterations
+- `top_n_p3p`: The fraction of top-N maps to run P3P.
+- `max_fine_imsize`: The maximum image size for the fine forward pass. This can be reduced if you encounter memory issues, although this will most likely lead to loss in accuracy.
+- `coarse_sigma_max` and `coarse_sigma_min`: Control the sigma upper and lower boundaries for the coarse GNC-IRLS. Analogous parameters are available for the fine GNC-IRLS.
+- `use_re=True`: This additional parameter can be passed in the `estimator.localize()` method. This setting corresponds to Eq. 11 minimization in the paper).
+
+## :page_with_curl: BibTex
 
 Please consider citing our work:
 
-```
-@inproceedings{germain2021NRE,
-  author    = {Hugo Germain and
-               Vincent Lepetit and
-               Guillaume Bourmaud},
-  title     = {Neural Reprojection Error: Merging Feature Learning and Camera Pose Estimation},
-  booktitle = {CVPR},
-  year      = {2021},
-  url       = {https://arxiv.org/abs/2103.07153}
+```txt
+@InProceedings{Germain_2021_CVPR,
+    author    = {Germain, Hugo and Lepetit, Vincent and Bourmaud, Guillaume},
+    title     = {Neural Reprojection Error: Merging Feature Learning and Camera Pose Estimation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2021},
+    pages     = {414-423}
 }
 ```
 

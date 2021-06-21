@@ -1,0 +1,23 @@
+# Whether to skip the GNC-refinement step
+skip_gnc: False
+
+# Number of P3P iterations
+n_iter_p3p: 5000
+
+# Run P3P on top-% keypoints, based on argmax probability
+top_n_p3p: 0.25
+
+# Maximum fine network image size
+max_fine_imsize: 1600
+
+# Size of minibatch for GNC-IRLS
+gnc_minibatch: 3000
+
+# Coarse GNC Scheduling (in coarse NRE space) for P3P
+p3p_sigma_max: 2.0
+p3p_sigma_min: 0.6
+
+# Fine GNC Scheduling and local window size (in fine NRE space)
+window_size: 16
+fine_sigma_max: 2.0
+fine_sigma_min: 0.6
