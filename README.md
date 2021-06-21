@@ -34,6 +34,7 @@ For a given pair of images, localizing with the NRE-based pose estimator is as s
 
 You can run NRE-based camera pose estimation on a Megadepth validation sample in `example.ipynb`.
 You will need to have the aforementionned dependencies installed, as well as a GPU with 8Gb+ memory.
+For simple visualization of the notebook try [this link](https://nbviewer.jupyter.org/github/germain-hug/NRE/blob/main/example.ipynb).
 
 ## :control_knobs: Additional parameters
 
