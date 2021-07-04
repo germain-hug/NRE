@@ -10,7 +10,9 @@ from .sparse import compute_t_qn_and_r_qn
 
 
 def skew_symmetric(v: torch.Tensor):
-    """Create a skew-symmetric matrix from a (batched) vector of size (..., 3)."""
+    """Create a skew-symmetric matrix from a (batched) vector of size (..., 3).
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
+    """
     z = torch.zeros_like(v[..., 0])
     M = torch.stack(
         [
@@ -31,6 +33,7 @@ def skew_symmetric(v: torch.Tensor):
 
 def so3exp_map(w: torch.Tensor, eps: float = 1e-7):
     """Compute rotation matrices from batched twists.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
     Args:
         w: batched 3D axis-angle vectors of size (..., 3).
     Returns:
@@ -47,7 +50,9 @@ def so3exp_map(w: torch.Tensor, eps: float = 1e-7):
 
 
 def update_camera(camera: Dict[str, torch.Tensor], delta: torch.Tensor):
-    """Update the camera pose given a delta in SO3."""
+    """Update the camera pose given a delta in SO3.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
+    """
     new_camera = deepcopy(camera)
     new_camera["R"] = so3exp_map(delta[:3].view(1, 3))[0] @ new_camera["R"]
     new_camera["t"] = camera["t"] + delta[3:].view(3)

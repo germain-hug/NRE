@@ -15,6 +15,7 @@ def read_image(
     max_image_size: int = None,
 ):
     """Read and resize an image.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
     Args:
         * path: The absolute path to the image.
         * K: The intrinsics matrix (to be rescaled along with the image).
@@ -45,7 +46,9 @@ def normalize(image):
 
 
 def resize(image, size, fn=None):
-    """Resize an image to a fixed size, or according to max or min edge."""
+    """Resize an image to a fixed size, or according to max or min edge.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
+    """
     h, w = image.shape[:2]
     if isinstance(size, int):
         scale = size / fn(h, w)

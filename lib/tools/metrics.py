@@ -6,6 +6,7 @@ import torch
 
 def pose_error(R0: torch.Tensor, t0: torch.Tensor, R1: torch.Tensor, t1: torch.Tensor):
     """Compute the rotation and translation error.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
     Args:
         * R0: The [3 x 3] first rotation matrix.
         * t0: The [3] first translation vector.

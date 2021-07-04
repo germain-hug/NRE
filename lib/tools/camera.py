@@ -6,6 +6,7 @@ import torch
 
 def to_homogeneous(points: torch.Tensor):
     """Convert N-dimensional points to homogeneous coordinates.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
     Args:
         points: torch.Tensor or numpy.ndarray with size (..., N).
     Returns:
@@ -23,6 +24,7 @@ def to_homogeneous(points: torch.Tensor):
 
 def from_homogeneous(points: torch.Tensor, eps: float = 1e-8):
     """Remove the homogeneous dimension of N-dimensional points.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
     Args:
         points: torch.Tensor or numpy.ndarray with size (..., N+1).
     Returns:
@@ -34,6 +36,7 @@ def from_homogeneous(points: torch.Tensor, eps: float = 1e-8):
 @torch.jit.script
 def undistort_keypoints(keypoints: torch.Tensor, params: torch.Tensor):
     """Undistort keypoints using radial and decentering coefficients.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
     Args:
         * keypoints: The image-space 2D keypoint coordinates, of size [N x 2].
         * params: The (k1, k2) radial and (p1, p2) distortion coefficients,
@@ -63,6 +66,7 @@ def project_keypoints(
     eps: float = 1e-4,
 ):
     """Project keypoints in from the 3D world to the image space.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
     Args:
         * p3D: The 3D keypoint coordinates, of size [N x 3].
         * R: The [3 x 3] rotation matrix R (camera-to-world).
@@ -114,7 +118,9 @@ def inbound_keypoints(
 
 
 def scale_intrinsics(K: np.ndarray, scales: Tuple[float]):
-    """Rescale linear calibration matrix K."""
+    """Rescale linear calibration matrix K.
+    Adapted from PixLoc (author: Paul-Edouard Sarlin) https://psarlin.com/pixloc/
+    """
     if isinstance(scales, torch.Tensor):
         scales = list(scales.view(2))
     if isinstance(scales, (int, float)):
