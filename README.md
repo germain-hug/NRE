@@ -51,7 +51,7 @@ Notably:
 
 Please consider citing our work:
 
-```txt
+```bibtex
 @InProceedings{Germain_2021_CVPR,
     author    = {Germain, Hugo and Lepetit, Vincent and Bourmaud, Guillaume},
     title     = {Neural Reprojection Error: Merging Feature Learning and Camera Pose Estimation},
@@ -61,4 +61,8 @@ Please consider citing our work:
     pages     = {414-423}
 }
 ```
+
+## :busts_in_silhouette: Acknowledgments 
+
+This codebase reuses some code snippets originally written by [Paul-Edouard Sarlin](https://psarlin.com/) for [PixLoc](https://github.com/cvg/pixloc).
 
